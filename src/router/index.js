@@ -1,5 +1,6 @@
-import routeIndex from './routes/index'
+import routeIndex from './routes/rootRoute'
+import userRoutes from './routes/userRoutes'
 
-const routesList = [routeIndex]
+const routesList = [routeIndex, ...userRoutes]
 
 export default routesList

@@ -6,8 +6,5 @@ describe('Index', () => {
     it('should exist', () => {
       expect(app).to.exist
     })
-    it('should be a function', () => {
-      expect(app).to.be.a('function')
-    })
   })
 })
