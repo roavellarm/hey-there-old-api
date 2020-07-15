@@ -8,11 +8,14 @@ const schema = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
+    index: true,
   },
   password: {
     type: String,
     required: true,
   },
+  contacts: [{ type: this }],
 })
 
-export default model('userModel', schema)
+export default model('User', schema)
