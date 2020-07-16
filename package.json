@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
-    "lint": "./node_modules/.bin/eslint ./src/*.js",
+    "lint": "./node_modules/.bin/eslint src",
     "build": "./node_modules/.bin/webpack --colors --progress",
-    "watch": "npm run build -- --watch",
+    "watch": "yarn build -- --watch",
     "test": "./node_modules/.bin/mocha --recursive ./src --exit --require @babel/register",
     "tdd": "./node_modules/.bin/mocha --recursive ./src --exit --require @babel/register --watch",
     "coverage": "nyc yarn test && rm -rf .nyc_output"
@@ -27,7 +27,7 @@
     }
   },
   "keywords": [],
-  "author": "",
+  "author": "Rodrigo Avellar de Muniagurria",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
