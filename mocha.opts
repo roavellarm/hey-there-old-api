@@ -1,0 +1,2 @@
+# test/mocha.opts
+--exclude **/*.spec.js

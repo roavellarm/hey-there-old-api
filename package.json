@@ -6,11 +6,10 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
     "lint": "./node_modules/.bin/eslint src",
-    "build": "./node_modules/.bin/webpack --colors --progress",
     "watch": "yarn build -- --watch",
     "test": "./node_modules/.bin/mocha --recursive ./src --exit --require @babel/register",
     "tdd": "./node_modules/.bin/mocha --recursive ./src --exit --require @babel/register --watch",
-    "coverage": "nyc yarn test && rm -rf .nyc_output"
+    "coverage": "nyc npm test && rm -rf ./.nyc_output"
   },
   "nyc": {
     "reporter": [
@@ -30,7 +29,6 @@
   "author": "Rodrigo Avellar de Muniagurria",
   "license": "ISC",
   "dependencies": {
-    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
