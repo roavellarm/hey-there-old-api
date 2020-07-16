@@ -15,7 +15,6 @@ const schema = new Schema({
     type: String,
     required: true,
   },
-  contacts: [{ type: this }],
 })
 
 export default model('User', schema)
