@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import app from '../src/index'
+import app from '../index'
 
 describe('Index', () => {
   describe('Smoke tests', () => {
