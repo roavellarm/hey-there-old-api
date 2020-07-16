@@ -5,11 +5,21 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
-    "lint": "./node_modules/.bin/eslint ./src/*.js",
+    "lint": "./node_modules/.bin/eslint src",
     "build": "./node_modules/.bin/webpack --colors --progress",
-    "watch": "npm run build -- --watch",
-    "test": "./node_modules/.bin/mocha --recursive src/ --require babel-register",
-    "test:tdd": "./node_modules/.bin/mocha ./test/**/*spec.js --require babel-register --watch"
+    "watch": "yarn build -- --watch",
+    "test": "./node_modules/.bin/mocha --recursive ./src --exit --require @babel/register",
+    "tdd": "./node_modules/.bin/mocha --recursive ./src --exit --require @babel/register --watch",
+    "coverage": "nyc yarn test && rm -rf .nyc_output"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "*.spec.js"
+    ]
   },
   "husky": {
     "hooks": {
@@ -17,7 +27,7 @@
     }
   },
   "keywords": [],
-  "author": "",
+  "author": "Rodrigo Avellar de Muniagurria",
   "license": "ISC",
   "dependencies": {
     "chai-http": "^4.3.0",
@@ -28,26 +38,22 @@
     "mongoose": "^5.9.21"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.1.0",
-    "babel-node": "^0.0.1-security",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015-native-modules": "^6.9.4",
-    "babel-register": "^6.26.0",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.5",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "mocha": "^8.0.1",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
-    "prettier": "^2.0.5",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "prettier": "^2.0.5"
   }
 }
