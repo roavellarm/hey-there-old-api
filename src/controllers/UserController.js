@@ -32,7 +32,6 @@ async function addNewContact(req, res) {
     const user = await User.findOne({ email: req.body.email })
     if (!user) return res.status(400).json({ error: "User doen't exists" })
 
-
     return res.status(200).json({ message: 'Contact added successfuly' })
   } catch (error) {
     return res.status(400).json({ error })
