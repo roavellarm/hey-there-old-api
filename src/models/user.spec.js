@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import userModel from '../../src/models/User'
+import userModel from './User'
 
 describe('userModel', () => {
   // it('should exist', () => expect(User).to.exist)
