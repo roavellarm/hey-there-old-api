@@ -23,8 +23,6 @@ async function addNewContact(req, res) {
 
     if (!UserData) return res.status(400).json({ error: "User dosen't exists" })
     // checar quem é o currentUser
-    const currentUserName = UserData.name
-
     // ver se o newContactUser existe
     // ver se o newContactUser já não está na lista de contatos do currentUser
     //  const user = await User.findOne({ email: req.body.email })
