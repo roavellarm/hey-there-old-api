@@ -10,6 +10,30 @@ async function getAllUsers(req, res) {
   }
 }
 
+async function addNewContact(req, res) {
+  try {
+    // DADOS NECESSARIOS: email do currentUser[headers: token], email do newContactUser[body]
+    const data = {
+      emailCurrentUser: req.body.email,
+      token: req.headers.token,
+      emailNewUser: req.body.NewContact,
+    }
+
+    const UserData = await User.findOne({ email: data.emailCurrentUser })
+
+    if (!UserData) return res.status(400).json({ error: "User dosen't exists" })
+    // checar quem é o currentUser
+    const currentUserName = UserData.name
+
+    // ver se o newContactUser existe
+    // ver se o newContactUser já não está na lista de contatos do currentUser
+    //  const user = await User.findOne({ email: req.body.email })
+    return res.send({ CurrentUserName: UserData.name })
+  } catch (error) {
+    return res.status(400).json({ error })
+  }
+}
+
 // async function addNewContact(req, res) {
 //   try {
 //     // DADOS NECESSARIOS: email do currentUser[headers: token], email do newContactUser[body]
@@ -25,4 +49,4 @@ async function getAllUsers(req, res) {
 //   }
 // }
 
-export default { getAllUsers }
+export default { getAllUsers, addNewContact }
