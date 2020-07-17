@@ -1,10 +1,10 @@
 import chai, { expect } from 'chai'
 import chaiHttp from 'chai-http'
-import userRoutes from './userRoutes'
+import userRoutes from '../userRoutes'
 
 chai.use(chaiHttp)
 
-describe.only('userRoutes', () => {
+describe('userRoutes', () => {
   describe('Smoke tests', () => {
     it('should exist', () => expect(userRoutes).to.exist)
     it('should be an array', () => expect(userRoutes).to.be.an('array'))

@@ -1,6 +1,6 @@
 import chai, { expect } from 'chai'
 import Http from 'chai-http'
-import getAllUsers from '../controllers/UserController'
+import getAllUsers from '../UserController'
 
 chai.use(Http)
 

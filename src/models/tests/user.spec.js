@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import User from './User'
+import User from '../User'
 
 describe('User', () => {
   const user = new User()

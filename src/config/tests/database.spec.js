@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import startDatabase from './database'
+import startDatabase from '../database'
 
 describe('startDatabase', () => {
   describe('Smoke tests', () => {

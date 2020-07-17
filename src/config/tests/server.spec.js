@@ -1,5 +1,5 @@
 import { expect, util } from 'chai'
-import startServer from './server'
+import startServer from '../server'
 
 describe('startServer', () => {
   describe('Smoke tests', () => {

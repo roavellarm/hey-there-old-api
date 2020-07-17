@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import router from './index'
+import router from '../index'
 
 describe('router', () => {
   describe('Smoke tests', () => {
