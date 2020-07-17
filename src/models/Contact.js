@@ -1,17 +1,16 @@
-// import { model, Schema } from 'mongoose'
+import { model, Schema } from 'mongoose'
 
-// const schema = new Schema({
+const schema = new Schema({
+  owner: {
+    type: String,
+    required: true,
+    index: true,
+    unique: true,
+  },
+  contacts: {
+    type: Array,
+    required: true,
+  },
+})
 
-// })
-
-// export default model('Contact', schema)
-
-/*
-
-cada user tem uma varios de contatos
-
-CONTATO
-owner: user_id
-contacts: [user_id]
-
-*/
+export default model('Contacts', schema)
