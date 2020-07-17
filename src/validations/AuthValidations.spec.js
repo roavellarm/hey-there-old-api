@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import { registerValidation } from './UserValidations'
+import { registerValidation } from './AuthValidations'
 
-describe('UserValidations', () => {
+describe('AuthValidations', () => {
   describe('registerValidation', () => {
     it('should exist', () => {
       expect(registerValidation).to.exist
