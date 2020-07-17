@@ -1,34 +1,10 @@
-import chai, { expect } from 'chai'
-import Http from 'chai-http'
-import getAllUsers from '../UserController'
-
-chai.use(Http)
+import { expect } from 'chai'
+import UserController from '../UserController'
 
 describe('User Controller', () => {
-  describe('Smoke tests', () => {
-    it('should exists', () => expect(getAllUsers).to.exist)
-    it('should be a function', () => expect(getAllUsers).to.be.a('object'))
-  })
-
-  describe('POST /users', () => {
-    context('whith correct params', () => {
-      // before(
-      //   // faz a conexão
-      // )
-      // after(
-      //   // desconecta
-      // )
-
-      it('should return 201', (done) => {
-        chai
-          .request('http://localhost:3001')
-          .post('/users')
-          .send('User correct')
-          .end((err, res) => {
-            res.should.have.status(201)
-            done()
-          })
-      })
-    })
+  const { getAllUsers } = UserController
+  describe('getAllUsers', () => {
+    it('should have a getAllUsers action', () => expect(getAllUsers).to.exist)
+    it('should be a function', () => expect(getAllUsers).to.be.a('function'))
   })
 })
