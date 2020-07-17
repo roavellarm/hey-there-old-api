@@ -1,12 +1,13 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-function startDatabase(connectionString) {
-  dotenv.config()
-  if (!connectionString)
-    throw Error(`Connection string is required to start database`)
+const { DATABASE } = process.env
+dotenv.config()
 
-  mongoose.connect(connectionString, {
+function startDatabase(DATABASE) {
+  if (!DATABASE) throw Error(`Connection string is required to start database`)
+
+  mongoose.connect(DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

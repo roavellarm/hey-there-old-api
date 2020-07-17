@@ -7,4 +7,10 @@ describe('User Controller', () => {
     it('should have a getAllUsers action', () => expect(getAllUsers).to.exist)
     it('should be a function', () => expect(getAllUsers).to.be.a('function'))
   })
+  const { addNewContact } = UserController
+  describe('addNewController', () => {
+    it('should have a AddNewContact action', () =>
+      expect(addNewContact).to.exist)
+    it('should be a function', () => expect(addNewContact).to.be.a('function'))
+  })
 })

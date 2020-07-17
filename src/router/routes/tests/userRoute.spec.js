@@ -4,7 +4,7 @@ import userRoutes from '../userRoutes'
 
 chai.use(chaiHttp)
 
-describe('userRoutes', () => {
+describe.only('userRoutes', () => {
   describe('Smoke tests', () => {
     it('should exist', () => expect(userRoutes).to.exist)
     it('should be an array', () => expect(userRoutes).to.be.an('array'))
@@ -18,6 +18,18 @@ describe('userRoutes', () => {
         .end((err, res) => {
           expect(res).to.have.status(200)
           expect(res.body).to.be.an('array')
+          done()
+        })
+    })
+  })
+
+  describe('POST /new-contact', () => {
+    it('should register users', (done) => {
+      chai
+        .request(userRoutes[1])
+        .post('/new-contact')
+        .end((err, res) => {
+          expect(res).to.have.status(201)
           done()
         })
     })

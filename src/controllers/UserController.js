@@ -21,12 +21,12 @@ async function addNewContact(req, res) {
 
     const UserData = await User.findOne({ email: data.emailCurrentUser })
 
-    if (!UserData) return res.status(400).json({ error: "User dosen't exists" })
+    // if (!UserData) return res.status(400).json({ error: "User dosen't exists" })
     // checar quem é o currentUser
     // ver se o newContactUser existe
     // ver se o newContactUser já não está na lista de contatos do currentUser
     //  const user = await User.findOne({ email: req.body.email })
-    return res.send({ CurrentUserName: UserData.name })
+    return res.status(201).send({ CurrentUserName: UserData.name })
   } catch (error) {
     return res.status(400).json({ error })
   }
