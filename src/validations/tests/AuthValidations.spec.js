@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { registerValidation } from './AuthValidations'
+import { registerValidation } from '../AuthValidations'
 
 describe('AuthValidations', () => {
   describe('registerValidation', () => {
