@@ -3,9 +3,6 @@ import UserController from '../../controllers/UserController'
 
 const route = new Router()
 
-const userRoutes = [
-  route.get('/users', UserController.getAllUsers),
-  route.post('/users', UserController.register),
-]
+const userRoutes = [route.get('/users', UserController.getAllUsers)]
 
 export default userRoutes
