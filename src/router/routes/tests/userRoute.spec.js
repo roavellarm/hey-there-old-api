@@ -22,28 +22,4 @@ describe('userRoutes', () => {
         })
     })
   })
-
-  describe('POST /users', () => {
-    const user = {
-      name: 'Foo',
-      email: 'foo@bar.com',
-      password: 'Foo@123',
-    }
-
-    it('should return status created (201)', (done) => {
-      chai
-        .request(userRoutes[1])
-        .post('/users')
-        .send({
-          name: 'Foo',
-          email: 'foo@bar.com',
-          password: 'FooBar@123',
-        })
-        .end(function (err, res) {
-          expect(err).to.be.null
-          expect(res).to.have.status(201)
-          done()
-        })
-    })
-  })
 })
