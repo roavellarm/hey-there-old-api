@@ -1,35 +1,34 @@
 import chai, { expect } from 'chai'
-import getAllUsers from '../controllers/UserController'
 import Http from 'chai-http'
-
-describe('UserController', () => {
-  describe('Smoke tests', () => {
-    it('should exists', () => {
-      expect(getAllUsers).to.exist
-    })
-  })
-})
+import getAllUsers from '../controllers/UserController'
 
 chai.use(Http)
 
-describe('Usuario - Endpoints', () => {
+describe('User Controller', () => {
+  describe('Smoke tests', () => {
+    it('should exists', () => expect(getAllUsers).to.exist)
+    it('should be a function', () => expect(getAllUsers).to.be.a('object'))
+  })
+
   describe('POST /users', () => {
-    it('deve retornar usuário criado - 201', (done) => {
-      chai
-        .request('http://localhost:3001')
-        .post('users')
-        .send('User correct')
-        .end((err, res) => {
-          chai.assert.isNull(err)
-          chai.assert.isNotEmpty(res.body)
-          res.should.have.status(201)
-          res.body.should.have.property('error').equal(0)
-          res.body.payload.comments.should.have.property('name')
-          res.body.payload.comments.should.have
-            .property('name')
-            .equal(USUARIO_VALIDO.name)
-          done()
-        })
+    context('whith correct params', () => {
+      // before(
+      //   // faz a conexão
+      // )
+      // after(
+      //   // desconecta
+      // )
+
+      it('should return 201', (done) => {
+        chai
+          .request('http://localhost:3001')
+          .post('/users')
+          .send('User correct')
+          .end((err, res) => {
+            res.should.have.status(201)
+            done()
+          })
+      })
     })
   })
 })

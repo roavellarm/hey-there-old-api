@@ -21,9 +21,8 @@ async function register(req, res) {
       name: req.body.name,
       email: req.body.email,
       password: md5(req.body.password, process.env.GLOBAL_SAL_KEY),
-      contacts: req.body.contacts,
     })
-    return res.status(200).json({ message: 'User created successfuly' })
+    return res.status(201).json({ message: 'User created successfuly' })
   } catch (error) {
     return res.status(400).json({ error })
   }

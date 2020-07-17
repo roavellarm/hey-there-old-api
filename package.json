@@ -7,9 +7,9 @@
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
     "lint": "./node_modules/.bin/eslint src",
     "watch": "yarn build -- --watch",
-    "test": "./node_modules/.bin/mocha ./src --recursive --exit --require @babel/register",
-    "tdd": "./node_modules/.bin/mocha --recursive ./src --exit --require @babel/register --watch",
-    "cov": "nyc yarn test"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha ./src --recursive --timeout 10000 --exit --require @babel/register",
+    "tdd": "NODE_ENV=test ./node_modules/.bin/mocha ./src --recursive --timeout 10000 --exit --require @babel/register --watch",
+    "cov": "NODE_ENV=test nyc yarn test"
   },
   "nyc": {
     "reporter": [
