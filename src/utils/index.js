@@ -25,12 +25,12 @@ export async function generateToken(data) {
 }
 
 export async function decodeToken(token) {
-  return jwt.decode(token, process.env.SALT_KEY)
+  return jwt.decode(token, process.env.GLOBAL_SAL_KEY)
 }
 
 export function verifyToken(token) {
-  return jwt.verify(token, process.env.SALT_KEY, (error, decode) => {
-    if (error) return error
+  return jwt.verify(token, process.env.GLOBAL_SAL_KEY, (error, decode) => {
+    if (error) return { error }
     return decode
   })
 }

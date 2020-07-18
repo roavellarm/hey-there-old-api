@@ -7,10 +7,10 @@ export async function registerValidation(data) {
   if (!email) errors.push('Email is required')
   if (!isEmail(email)) errors.push('Email is invalid')
   if (!password) errors.push('Password is required')
-  if (!isPassword(password))
+  if (!isPassword(password)) {
     errors.push('Password must have 8 digits, uppercase, lowercase and numbers')
-
-  const result = isUser(email)
+  }
+  const result = await isUser({ email })
   if (result) errors.push('Email already exists')
 
   return errors

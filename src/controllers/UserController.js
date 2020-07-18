@@ -12,20 +12,14 @@ async function getAllUsers(req, res) {
 
 async function addNewContact(req, res) {
   try {
-    // DADOS NECESSARIOS: email do currentUser[headers: token], email do newContactUser[body]
-    // const data = {
-    //   emailCurrentUser: req.body.email,
-    //   token: req.headers.token,
-    //   emailNewUser: req.body.newContact,
-    // }
+    // quem é o currentUser? (email/id)
+    // quem ele está adicionando? (email/id)
 
-    // const UserData = await User.findOne({ email: data.emailCurrentUser })
+    // verificar se o newContact existe
+    // se não existe, retornar mensagem dizendo q usuário não existe
 
-    // if (!UserData) return res.status(400).json({ error: "User dosen't exists" })
-    // checar quem é o currentUser
-    // ver se o newContactUser existe
-    // ver se o newContactUser já não está na lista de contatos do currentUser
-    //  const user = await User.findOne({ email: req.body.email })
+    // se existe, adicionar o email dele na lista de contatos do currentUser
+
     return res.status(201).send(
       // { CurrentUserName: UserData.name }
       { message: 'testando 123' }
