@@ -1,11 +1,6 @@
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
 
-dotenv.config()
-
-const { DATABASE } = process.env
-
-function startDatabase() {
+function startDatabase(DATABASE) {
   if (!DATABASE) throw Error(`Connection string is required to start database`)
 
   mongoose.connect(DATABASE, {

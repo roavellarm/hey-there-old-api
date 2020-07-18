@@ -4,7 +4,7 @@ import userRoutes from '../userRoutes'
 
 chai.use(chaiHttp)
 
-describe.only('userRoutes', () => {
+describe('userRoutes', () => {
   describe('Smoke tests', () => {
     it('should exist', () => expect(userRoutes).to.exist)
     it('should be an array', () => expect(userRoutes).to.be.an('array'))
@@ -24,7 +24,7 @@ describe.only('userRoutes', () => {
   })
 
   describe('POST /new-contact', () => {
-    it('should register users', (done) => {
+    it('should add new contact', (done) => {
       chai
         .request(userRoutes[1])
         .post('/new-contact')

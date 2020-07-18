@@ -13,38 +13,26 @@ async function getAllUsers(req, res) {
 async function addNewContact(req, res) {
   try {
     // DADOS NECESSARIOS: email do currentUser[headers: token], email do newContactUser[body]
-    const data = {
-      emailCurrentUser: req.body.email,
-      token: req.headers.token,
-      emailNewUser: req.body.NewContact,
-    }
+    // const data = {
+    //   emailCurrentUser: req.body.email,
+    //   token: req.headers.token,
+    //   emailNewUser: req.body.newContact,
+    // }
 
-    const UserData = await User.findOne({ email: data.emailCurrentUser })
+    // const UserData = await User.findOne({ email: data.emailCurrentUser })
 
     // if (!UserData) return res.status(400).json({ error: "User dosen't exists" })
     // checar quem é o currentUser
     // ver se o newContactUser existe
     // ver se o newContactUser já não está na lista de contatos do currentUser
     //  const user = await User.findOne({ email: req.body.email })
-    return res.status(201).send({ CurrentUserName: UserData.name })
+    return res.status(201).send(
+      // { CurrentUserName: UserData.name }
+      { message: 'testando 123' }
+    )
   } catch (error) {
     return res.status(400).json({ error })
   }
 }
-
-// async function addNewContact(req, res) {
-//   try {
-//     // DADOS NECESSARIOS: email do currentUser[headers: token], email do newContactUser[body]
-//     // checar quem é o currentUser
-//     // ver se o newContactUser existe
-//     // ver se o newContactUser já não está na lista de contatos do currentUser
-//     const user = await User.findOne({ email: req.body.email })
-//     if (!user) return res.status(400).json({ error: "User doen't exists" })
-
-//     return res.status(200).json({ message: 'Contact added successfuly' })
-//   } catch (error) {
-//     return res.status(400).json({ error })
-//   }
-// }
 
 export default { getAllUsers, addNewContact }
