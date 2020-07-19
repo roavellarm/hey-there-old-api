@@ -1,4 +1,4 @@
-import { verifyToken } from '../utils'
+import { verifyToken, getCurrentUser } from '../utils'
 
 // eslint-disable-next-line import/prefer-default-export
 export async function isAuthorized(req, res, next) {
@@ -9,5 +9,6 @@ export async function isAuthorized(req, res, next) {
   const { error, decode } = await verifyToken(token)
 
   if (error) return res.status(401).send({ error: 'Invalid token' })
-  return next(decode)
+  req.body.currentUser = await getCurrentUser(decode.email)
+  return next()
 }

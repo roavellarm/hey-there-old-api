@@ -4,7 +4,7 @@ import userRoutes from '../userRoutes'
 
 chai.use(chaiHttp)
 
-describe('userRoutes', () => {
+describe.only('userRoutes', () => {
   describe('Smoke tests', () => {
     it('should exist', () => expect(userRoutes).to.exist)
     it('should be an array', () => expect(userRoutes).to.be.an('array'))

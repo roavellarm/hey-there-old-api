@@ -15,6 +15,11 @@ const schema = new Schema({
     type: String,
     required: true,
   },
+  contacts: [
+    {
+      type: String, // Saves new contact email
+    },
+  ],
 })
 
 export default model('User', schema)

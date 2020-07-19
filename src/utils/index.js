@@ -31,7 +31,7 @@ export async function decodeToken(token) {
 export function verifyToken(token) {
   return jwt.verify(token, process.env.GLOBAL_SAL_KEY, (error, decode) => {
     if (error) return { error }
-    return decode
+    return { decode }
   })
 }
 
@@ -43,4 +43,9 @@ export async function isUser(data) {
 
   if (!user) return false
   return true
+}
+
+export async function getCurrentUser(email) {
+  const currentUser = await User.findOne({ email })
+  return currentUser
 }

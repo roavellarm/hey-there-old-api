@@ -1,4 +1,5 @@
 import User from '../models/User'
+import { newContactValidation } from '../validations/UserValidations'
 
 async function getAllUsers(req, res) {
   try {
@@ -12,18 +13,16 @@ async function getAllUsers(req, res) {
 
 async function addNewContact(req, res) {
   try {
-    // quem é o currentUser? (email/id)
-    // quem ele está adicionando? (email/id)
-
-    // verificar se o newContact existe
-    // se não existe, retornar mensagem dizendo q usuário não existe
-
-    // se existe, adicionar o email dele na lista de contatos do currentUser
-
-    return res.status(201).send(
-      // { CurrentUserName: UserData.name }
-      { message: 'testando 123' }
+    const { errors, newContactEmail, currentUser } = await newContactValidation(
+      req.body
     )
+
+    if (errors.length) return res.status(400).send({ error: errors })
+
+    currentUser.contacts.push(newContactEmail)
+    currentUser.save()
+
+    return res.status(201).send({ message: 'New contact added successfully' })
   } catch (error) {
     return res.status(400).json({ error })
   }
