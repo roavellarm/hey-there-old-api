@@ -20,6 +20,7 @@ const schema = new Schema({
       type: String, // Saves new contact email
     },
   ],
+  avatar: String,
 })
 
 export default model('User', schema)
