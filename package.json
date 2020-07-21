@@ -7,13 +7,13 @@
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
     "build": "./node_modules/.bin/webpack --colors --progress",
-    "watch": "npm run build -- --watch",
+    "watch": "yarn build -- --watch",
     "test": "./node_modules/.bin/mocha ./tests/**/*.spec.js --require babel-register",
     "test:tdd": "./node_modules/.bin/mocha ./tests/**/*.spec.js --require babel-register --watch"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run coverage"
+      "pre-push": "yarn lint"
     }
   },
   "keywords": [],
