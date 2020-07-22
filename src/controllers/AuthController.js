@@ -2,9 +2,8 @@ import {
   registerValidation,
   loginValidation,
 } from '../validations/AuthValidations'
-import { encryptPassword, generateToken } from '../utils'
+import { encryptPassword, generateToken, verifyToken } from '../utils'
 import User from '../models/User'
-import { verifyToken } from '../utils/index'
 
 async function register(req, res) {
   try {
@@ -39,7 +38,6 @@ async function login(req, res) {
 async function isValidToken(req, res) {
   try {
     const { decode, error } = await verifyToken(req.body.token)
-    console.log('entrou aqui')
     if (error && !decode) return res.status(200).send({ isValidToken: false })
 
     return res.status(200).send({ isValidToken: true })
