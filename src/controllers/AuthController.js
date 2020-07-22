@@ -42,7 +42,7 @@ async function isValidToken(req, res) {
 
     return res.status(200).send({ isValidToken: true })
   } catch (error) {
-    return res.status(400).send({ error: 'qualquer' })
+    return res.status(400).send({ error })
   }
 }
 
