@@ -21,6 +21,10 @@ const schema = new Schema({
     },
   ],
   avatar: String,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 })
 
 export default model('User', schema)
