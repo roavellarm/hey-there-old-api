@@ -4,7 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "start": "NODE_ENV=production npm run build && node --optimize_for_size --max_old_space_size=920 --gc_interval=100 dist",
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "build": "babel src -d dist",
     "lint": "./node_modules/.bin/eslint src",
     "watch": "yarn build -- --watch",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha ./src --recursive --timeout 15000 --exit --require @babel/register",
@@ -31,8 +33,16 @@
   "keywords": [],
   "author": "Rodrigo Avellar de Muniagurria",
   "license": "ISC",
+  "engines": {
+    "node": "12.18.x"
+  },
   "dependencies": {
     "aws-sdk": "^2.715.0",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/node": "^7.10.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -44,10 +54,6 @@
     "multer-s3": "^2.9.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
     "@babel/register": "^7.10.5",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
