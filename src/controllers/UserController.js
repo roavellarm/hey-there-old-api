@@ -32,7 +32,7 @@ async function getAllImages(req, res) {
 async function deleteImage(req, res) {
   const image = await Image.findById(req.params.id)
   await image.remove()
-  return res.send()
+  return res.send({ Message: 'Image deleted successfuly' })
 }
 
 async function addNewContact(req, res) {
