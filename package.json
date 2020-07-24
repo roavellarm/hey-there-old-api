@@ -37,6 +37,11 @@
     "node": "12.18.x"
   },
   "dependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/cli": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/node": "^7.10.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -45,10 +50,6 @@
     "mongoose": "^5.9.21"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
     "@babel/register": "^7.10.5",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
