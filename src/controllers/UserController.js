@@ -1,4 +1,5 @@
 import User from '../models/User'
+import Image from '../models/Image'
 import { newContactValidation } from '../validations/UserValidations'
 
 async function getAllUsers(req, res) {
@@ -9,6 +10,29 @@ async function getAllUsers(req, res) {
   } catch (error) {
     return res.status(400).send({ error })
   }
+}
+
+async function uploadImage(req, res) {
+  const { originalname: name, size, key, location: url = '' } = req.file
+
+  const image = await Image.create({
+    name,
+    size,
+    key,
+    url,
+  })
+  return res.json(image)
+}
+
+async function getAllImages(req, res) {
+  const images = await Image.find()
+  return res.json(images)
+}
+
+async function deleteImage(req, res) {
+  const image = await Image.findById(req.params.id)
+  await image.remove()
+  return res.send()
 }
 
 async function addNewContact(req, res) {
@@ -28,4 +52,10 @@ async function addNewContact(req, res) {
   }
 }
 
-export default { getAllUsers, addNewContact }
+export default {
+  getAllUsers,
+  uploadImage,
+  getAllImages,
+  deleteImage,
+  addNewContact,
+}
