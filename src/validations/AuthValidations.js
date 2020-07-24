@@ -10,6 +10,8 @@ export async function registerValidation(data) {
   if (!isPassword(password)) {
     errors.push('Password must have 8 digits, uppercase, lowercase and numbers')
   }
+  if (errors.length) return errors
+
   const result = await isUser({ email })
   if (result) errors.push('Email already exists')
 
