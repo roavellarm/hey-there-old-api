@@ -4,6 +4,6 @@ const router = new Router()
 
 const data = { title: 'Hey There API', apiVersion: '0.0.0' }
 
-const indexRoute = router.get('/', (req, res) => res.status(200).send(data))
+const rootRoute = router.get('/', (req, res) => res.status(200).send(data))
 
-export default indexRoute
+export default rootRoute

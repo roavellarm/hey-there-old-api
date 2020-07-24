@@ -1,10 +1,9 @@
 import mongoose from 'mongoose'
 
-function startDatabase(connectionString) {
-  if (!connectionString)
-    throw Error(`Connection string is required to start database`)
+function startDatabase(DATABASE) {
+  if (!DATABASE) throw Error(`Connection string is required to start database`)
 
-  mongoose.connect(connectionString, {
+  mongoose.connect(DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

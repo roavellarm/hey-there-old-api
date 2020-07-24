@@ -4,12 +4,26 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "start": "NODE_ENV=production npm run build && node --optimize_for_size --max_old_space_size=920 --gc_interval=100 dist",
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
-    "lint": "./node_modules/.bin/eslint ./src/*.js",
-    "build": "./node_modules/.bin/webpack --colors --progress",
+    "build": "babel src -d dist",
+    "lint": "./node_modules/.bin/eslint src",
     "watch": "yarn build -- --watch",
-    "test": "./node_modules/.bin/mocha ./tests/**/*.spec.js --require babel-register",
-    "test:tdd": "./node_modules/.bin/mocha ./tests/**/*.spec.js --require babel-register --watch"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha ./src --recursive --timeout 15000 --exit --require @babel/register",
+    "tdd": "NODE_ENV=test ./node_modules/.bin/mocha ./src --recursive --timeout 15000 --exit --require @babel/register --watch",
+    "coverage": "NODE_ENV=test nyc yarn test"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "**/*.spec.js"
+    ]
   },
   "husky": {
     "hooks": {
@@ -17,34 +31,43 @@
     }
   },
   "keywords": [],
-  "author": "",
+  "author": "Rodrigo Avellar de Muniagurria",
   "license": "ISC",
+  "engines": {
+    "node": "12.18.x"
+  },
   "dependencies": {
+    "aws-sdk": "^2.715.0",
+    "@babel/core": "^7.10.5",
+    "@babel/cli": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/node": "^7.10.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.21"
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.2.1",
+    "mongoose": "^5.9.21",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.1.0",
-    "babel-node": "^0.0.1-security",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015-native-modules": "^6.9.4",
-    "babel-register": "^6.26.0",
+    "@babel/register": "^7.10.5",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-prettier": "^3.1.4",
+    "faker": "^4.1.0",
     "husky": "^4.2.5",
     "mocha": "^8.0.1",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "sinon": "^9.0.2"
   }
 }
