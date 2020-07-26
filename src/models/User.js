@@ -17,10 +17,15 @@ const schema = new Schema({
   },
   contacts: [
     {
-      type: String, // Saves new contact email
+      type: String, // User email
     },
   ],
+  chatList: [{ type: String }],
   avatar: String,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 })
 
 export default model('User', schema)
