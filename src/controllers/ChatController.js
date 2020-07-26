@@ -16,6 +16,12 @@ function excludeIdsFromData(chat) {
   }
 }
 
+async function updateUserChatList(email, chatId) {
+  const user = await User.findOne({ email })
+  user.chatList.push(chatId)
+  return user.save()
+}
+
 async function createChat(req, res) {
   try {
     const errors = await createChatValidations(req.body)
@@ -27,12 +33,7 @@ async function createChat(req, res) {
     }
     const chat = await Chat.create(data)
 
-    const users = await User.find({ users: req.body.users })
-
-    users.map((user) => {
-      user.chatList.push(chat.chatId)
-      return user.save()
-    })
+    req.body.users.map((userEmail) => updateUserChatList(userEmail, chat.id))
 
     return res.status(201).send({ message: 'Chat create successfuly!' })
   } catch (error) {
