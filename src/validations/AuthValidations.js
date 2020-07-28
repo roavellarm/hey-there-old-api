@@ -13,9 +13,14 @@ export async function registerValidation(data) {
   if (errors.length) return errors
 
   const result = await isUser({ email })
-  if (result) errors.push('Email already exists')
 
-  return errors
+  if (result && password.includes('@HeyThere') && !errors.length) {
+    const googleUser = true
+    return { errors, googleUser }
+  }
+  if (result) errors.push('User already registered')
+
+  return { errors }
 }
 
 export async function loginValidation(data) {
@@ -30,7 +35,13 @@ export async function loginValidation(data) {
   if (errors.length) return errors
 
   const result = await isUser(data)
+
+  if (!result && password.includes('@HeyThere') && !errors.length) {
+    const googleUser = true
+    return { errors, googleUser }
+  }
+
   if (!result) errors.push('Email or password incorrect')
 
-  return errors
+  return { errors }
 }

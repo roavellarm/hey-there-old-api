@@ -7,12 +7,18 @@ import User from '../models/User'
 
 async function register(req, res) {
   try {
-    const errors = await registerValidation(req.body)
+    const { errors, googleUser } = await registerValidation(req.body)
     if (errors.length) return res.status(400).send({ error: errors })
+
+    if (googleUser) {
+      const token = await generateToken(req.body)
+      return res.status(200).send({ token })
+    }
 
     await User.create({
       name: req.body.name,
       email: req.body.email,
+      avatar: req.body.avatar || null,
       password: encryptPassword(req.body.password),
     })
 
@@ -24,8 +30,17 @@ async function register(req, res) {
 
 async function login(req, res) {
   try {
-    const errors = await loginValidation(req.body)
+    const { errors, googleUser } = await loginValidation(req.body)
     if (errors.length) return res.status(400).send({ error: errors })
+
+    if (googleUser) {
+      await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        avatar: req.body.avatar,
+        password: encryptPassword(req.body.password),
+      })
+    }
 
     const token = await generateToken(req.body)
 
