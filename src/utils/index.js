@@ -40,9 +40,17 @@ export async function isUser(data) {
   const user = await User.findOne(
     password ? { email, password: encryptPassword(password) } : { email }
   )
+  return user
+}
 
-  if (!user) return false
-  return true
+export async function createUser(data) {
+  const user = await User.create({
+    name: data.name,
+    email: data.email,
+    avatar: data.avatar || null,
+    password: encryptPassword(data.password),
+  })
+  return user
 }
 
 export async function getCurrentUser(email) {

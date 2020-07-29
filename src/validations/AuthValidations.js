@@ -12,13 +12,14 @@ export async function registerValidation(data) {
   }
   if (errors.length) return errors
 
-  const result = await isUser({ email })
+  const user = await isUser({ email })
 
-  if (result && password.includes('@HeyThere') && !errors.length) {
+  if (user && password.includes('@HeyThere') && !errors.length) {
     const googleUser = true
-    return { errors, googleUser }
+    return { errors, googleUser, user }
   }
-  if (result) errors.push('User already registered')
+
+  if (user) errors.push('User already registered')
 
   return { errors }
 }
@@ -34,14 +35,14 @@ export async function loginValidation(data) {
   }
   if (errors.length) return errors
 
-  const result = await isUser(data)
+  const user = await isUser(data)
 
-  if (!result && password.includes('@HeyThere') && !errors.length) {
+  if (!user && password.includes('@HeyThere') && !errors.length) {
     const googleUser = true
     return { errors, googleUser }
   }
 
-  if (!result) errors.push('Email or password incorrect')
+  if (!user) errors.push('Email or password incorrect')
 
-  return { errors }
+  return { errors, user }
 }

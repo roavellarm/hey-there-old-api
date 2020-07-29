@@ -2,27 +2,20 @@ import {
   registerValidation,
   loginValidation,
 } from '../validations/AuthValidations'
-import { encryptPassword, generateToken, verifyToken } from '../utils'
-import User from '../models/User'
+import { generateToken, verifyToken, createUser } from '../utils'
 
 async function register(req, res) {
   try {
-    const { errors, googleUser } = await registerValidation(req.body)
+    const { errors, googleUser, user } = await registerValidation(req.body)
     if (errors.length) return res.status(400).send({ error: errors })
 
-    if (googleUser) {
-      const token = await generateToken(req.body)
-      return res.status(200).send({ token })
-    }
+    const token = await generateToken(req.body)
 
-    await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      avatar: req.body.avatar || null,
-      password: encryptPassword(req.body.password),
-    })
+    if (googleUser) return res.status(200).send({ token, currentUser: user })
 
-    return res.status(201).send({ message: 'User created successfuly' })
+    const newUser = await createUser(req.body)
+
+    return res.status(201).send({ token, currentUser: newUser })
   } catch (error) {
     return res.status(400).send({ error })
   }
@@ -30,21 +23,17 @@ async function register(req, res) {
 
 async function login(req, res) {
   try {
-    const { errors, googleUser } = await loginValidation(req.body)
+    const { errors, googleUser, user } = await loginValidation(req.body)
     if (errors.length) return res.status(400).send({ error: errors })
-
-    if (googleUser) {
-      await User.create({
-        name: req.body.name,
-        email: req.body.email,
-        avatar: req.body.avatar,
-        password: encryptPassword(req.body.password),
-      })
-    }
 
     const token = await generateToken(req.body)
 
-    return res.status(200).send({ token })
+    if (googleUser) {
+      const currentUser = await createUser(req.body)
+      return res.status(200).send({ token, currentUser })
+    }
+
+    return res.status(200).send({ token, currentUser: user })
   } catch (error) {
     return res.status(400).send({ error })
   }

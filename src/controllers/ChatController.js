@@ -67,7 +67,7 @@ async function getMessages(req, res) {
     )
     if (errors.length) return res.status(400).send({ error: errors })
 
-    return res.status(200).send({ data: excludeIdsFromData(chat) })
+    return res.status(200).send(excludeIdsFromData(chat))
   } catch (error) {
     return res.status(400).send({ error })
   }

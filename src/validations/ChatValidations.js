@@ -32,7 +32,7 @@ export async function sendMessageValidations(chatId, body) {
   if (currentUser.email !== author) errors.push("Can't identify user origin")
   if (!content) errors.push("Message can't be empty")
   if (typeof content !== 'string') errors.push('Content must be string')
-  if (errors.length) return errors
+  if (errors.length) return { errors }
 
   const chat = await Chat.findOne({ chatId })
   if (!chat) errors.push("Chat doesn't exist")
@@ -45,7 +45,7 @@ export async function getMessagesValidations(chatId, currentUser) {
   const chat = await Chat.findOne({ chatId })
   if (!chat) {
     errors.push("Chat doesn't exist")
-    return errors
+    return { errors }
   }
 
   if (!chat.users.includes(currentUser.email))
