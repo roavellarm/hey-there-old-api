@@ -41,6 +41,23 @@ async function createChat(req, res) {
   }
 }
 
+async function getChatInfo(req, res) {
+  try {
+    const { users } = await Chat.findOne({ chatId: req.params.id })
+
+    if (!users)
+      return res.status(400).send({ error: 'There is no users in this chat' })
+
+    const email = users.filter((user) => user !== req.body.currentUser.email)
+
+    const { name, avatar } = await User.findOne({ email }, 'name avatar')
+
+    return res.status(200).send({ otherUser: { name, avatar } })
+  } catch (error) {
+    return res.status(400).send({ error })
+  }
+}
+
 async function sendMessage(req, res) {
   try {
     const chatId = req.params.id
@@ -53,7 +70,7 @@ async function sendMessage(req, res) {
     chat.messages.push({ message: { content, author } })
     chat.save()
 
-    return res.status(200).send({ data: excludeIdsFromData(chat) })
+    return res.status(200).send(excludeIdsFromData(chat))
   } catch (error) {
     return res.status(400).send({ error })
   }
@@ -73,4 +90,4 @@ async function getMessages(req, res) {
   }
 }
 
-export default { createChat, sendMessage, getMessages }
+export default { createChat, getChatInfo, sendMessage, getMessages }
