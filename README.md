@@ -12,15 +12,5 @@ This project is an experimental web application of a chat, similar to whatssapp.
 
 ## :hammer_and_wrench: Stack
 
-
-[Heroku](http://heroku.com/)
-[NodeJS]()
-[Express]()
-[Mongoose]()
-[Babel]()
-
-[Mocha]()
-[Chai]()
-[ESLint]()
-[Nodemon]()
-[Prettier]()
+- [NodeJS](https://nodejs.org/)
+- [Express](https://expressjs.com/)

@@ -10,12 +10,18 @@ export async function registerValidation(data) {
   if (!isPassword(password)) {
     errors.push('Password must have 8 digits, uppercase, lowercase and numbers')
   }
-  if (errors.length) return errors
+  if (errors.length) return { errors }
 
-  const result = await isUser({ email })
-  if (result) errors.push('Email already exists')
+  const user = await isUser({ email })
 
-  return errors
+  if (user && password.includes('@HeyThere') && !errors.length) {
+    const googleUser = true
+    return { errors, googleUser, user }
+  }
+
+  if (user) errors.push('User already registered')
+
+  return { errors }
 }
 
 export async function loginValidation(data) {
@@ -27,10 +33,16 @@ export async function loginValidation(data) {
   if (!isPassword(password)) {
     errors.push('Password must have 8 digits, uppercase, lowercase and numbers')
   }
-  if (errors.length) return errors
+  if (errors.length) return { errors }
 
-  const result = await isUser(data)
-  if (!result) errors.push('Email or password incorrect')
+  const user = await isUser(data)
 
-  return errors
+  if (!user && password.includes('@HeyThere') && !errors.length) {
+    const googleUser = true
+    return { errors, googleUser }
+  }
+
+  if (!user) errors.push('Email or password incorrect')
+
+  return { errors, user }
 }
