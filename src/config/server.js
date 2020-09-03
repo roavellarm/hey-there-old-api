@@ -6,8 +6,9 @@ import morgan from 'morgan'
 import cors from 'cors'
 import path from 'path'
 
-function startServer(PORT, IO_PORT, routes) {
+function startServer(PORT, SOCKET_PORT, routes) {
   if (!PORT) throw Error(`Port is required to start server`)
+  if (!SOCKET_PORT) throw Error(`Socket port is required to start server`)
   if (!routes) throw Error(`Routes are required to start server`)
 
   const app = express()
@@ -26,17 +27,14 @@ function startServer(PORT, IO_PORT, routes) {
   const io = socket.listen(server)
 
   io.on('connection', (sock) => {
-    console.log('A user is connected :)')
-
-    sock.on('chat message', (msg) => {
-      console.log(msg)
-      io.emit('chat message', msg)
+    sock.on('chatMessage', (msg) => {
+      io.emit('chatMessage', msg)
     })
   })
 
   server.listen(
-    IO_PORT,
-    console.log(`Socket server is running on port ${IO_PORT}`)
+    SOCKET_PORT,
+    console.log(`Socket server is running on port ${SOCKET_PORT}`)
   )
 
   app.listen(PORT, () => console.log(`Http server running on port ${PORT}`))
