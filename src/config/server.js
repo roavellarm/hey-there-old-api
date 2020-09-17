@@ -6,9 +6,9 @@ import morgan from 'morgan'
 import cors from 'cors'
 import path from 'path'
 
-function startServer(PORT, SOCKET_PORT, routes) {
+function startServer(PORT, routes) {
   if (!PORT) throw Error(`Port is required to start server`)
-  if (!SOCKET_PORT) throw Error(`Socket port is required to start server`)
+  // if (!PORT) throw Error(`Socket port is required to start server`)
   if (!routes) throw Error(`Routes are required to start server`)
 
   const app = express()
@@ -32,10 +32,7 @@ function startServer(PORT, SOCKET_PORT, routes) {
     })
   })
 
-  server.listen(
-    SOCKET_PORT,
-    console.log(`Socket server is running on port ${SOCKET_PORT}`)
-  )
+  server.listen(PORT, console.log(`Socket server is running on port ${PORT}`))
 
   app.listen(PORT, () => console.log(`Http server running on port ${PORT}`))
 }

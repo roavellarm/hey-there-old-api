@@ -5,10 +5,10 @@ import routesList from './router/index'
 
 dotenv.config()
 
-const { DATABASE, PORT, SOCKET_PORT } = process.env
+const { DATABASE, PORT } = process.env
 
 startDatabase(DATABASE)
 
-startServer(PORT, SOCKET_PORT, routesList)
+startServer(PORT, routesList)
 
 export default { startServer }
