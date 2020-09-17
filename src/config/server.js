@@ -1,13 +1,18 @@
+/* eslint-disable no-console */
 import express from 'express'
+import socket from 'socket.io'
+import http from 'http'
 import morgan from 'morgan'
 import cors from 'cors'
 import path from 'path'
 
-function startServer(PORT, routes) {
+function startServer(PORT, SOCKET_PORT, routes) {
   if (!PORT) throw Error(`Port is required to start server`)
+  if (!SOCKET_PORT) throw Error(`Socket port is required to start server`)
   if (!routes) throw Error(`Routes are required to start server`)
 
   const app = express()
+  const server = http.createServer(app)
 
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
@@ -19,8 +24,20 @@ function startServer(PORT, routes) {
   app.use(cors())
   app.use('/', routes)
 
-  // eslint-disable-next-line no-console
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+  const io = socket.listen(server)
+
+  io.on('connection', (sock) => {
+    sock.on('chatMessage', (msg) => {
+      io.emit('chatMessage', msg)
+    })
+  })
+
+  server.listen(
+    SOCKET_PORT,
+    console.log(`Socket server is running on port ${SOCKET_PORT}`)
+  )
+
+  app.listen(PORT, () => console.log(`Http server running on port ${PORT}`))
 }
 
 export default startServer
