@@ -13,12 +13,22 @@ const schema = new Schema({
   messages: [
     {
       message: {
+        messageId: {
+          type: String,
+          unique: true,
+          required: true,
+          index: true,
+        },
         author: {
           type: String, // User email
           trim: true,
         },
         content: {
           type: String,
+        },
+        unReaded: {
+          type: Boolean,
+          default: true,
         },
         createdAt: {
           type: Date,
